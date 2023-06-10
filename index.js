@@ -1,10 +1,12 @@
 const express = require("express");
+const cors=require("cors");
 const { connection } = require("./db");
 const { userRouter } = require("./routes/User.routes");
 const {auth}=require("./Middlewere/authMiddleware");
 const jwt = require("jsonwebtoken");
 const app = express();
 app.use(express.json());
+app.use(cors())
 app.use("/users", userRouter);
 app.get("/", (req, res) => {
     res.send("welcome Home page");
