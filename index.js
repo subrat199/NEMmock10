@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.send("welcome Home page");
   });
 app.use(auth)
-app.get("/profile",userProfileRouter)
+app.use("/profile",userProfileRouter)
 app.listen(8080, async () => {
   try {
     await connection;
