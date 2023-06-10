@@ -6,10 +6,11 @@ const jwt = require("jsonwebtoken");
 const app = express();
 app.use(express.json());
 app.use("/users", userRouter);
-app.use(auth)
 app.get("/", (req, res) => {
-  res.send("welcome Home page");
-});
+    res.send("welcome Home page");
+  });
+app.use(auth)
+
 app.get("/movie", (req, res) => {
   res.send("Login success for movie")
 });
