@@ -4,6 +4,8 @@ const { connection } = require("./db");
 const { userRouter } = require("./routes/User.routes");
 const {auth}=require("./Middlewere/authMiddleware");
 const jwt = require("jsonwebtoken");
+// const { userProfile } = require("./model/userProfile");
+const { userProfileRouter } = require("./routes/User.profile");
 const app = express();
 app.use(express.json());
 app.use(cors())
@@ -12,10 +14,7 @@ app.get("/", (req, res) => {
     res.send("welcome Home page");
   });
 app.use(auth)
-
-app.get("/movie", (req, res) => {
-  res.send("Login success for movie")
-});
+app.get("/profile",userProfileRouter)
 app.listen(8080, async () => {
   try {
     await connection;
