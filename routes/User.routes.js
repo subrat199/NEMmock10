@@ -4,11 +4,11 @@ const {userModel}=require("../model/userModel")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 userRouter.post("/register",async (req,res)=>{
-    const {name,email,pass}=req.body
+    const {name,email,password}=req.body
     try {
-        bcrypt.hash(pass, 5, async (err, hash) =>{
+        bcrypt.hash(password, 5, async (err, hash) =>{
             // Store hash in your password DB.
-            const user=new userModel({name,email,pass:hash})
+            const user=new userModel({name,email,password:hash})
         await user.save()
         res.status(200).send("New user has been registered")
         });
@@ -20,11 +20,11 @@ userRouter.post("/register",async (req,res)=>{
    
 })
 userRouter.post("/login",async (req,res)=>{
-    const {email,pass}=req.body
+    const {email,password}=req.body
     try {
         const user= await userModel.findOne({email})
         if(user){
-            bcrypt.compare(pass, user.pass, (err, result)=> {
+            bcrypt.compare(password, user.password, (err, result)=> {
                if(result){
                 const token = jwt.sign({ course: 'backend' }, 'masai')
                 res.status(200).send({"mesg":"Login SuccessFull","token":token})
