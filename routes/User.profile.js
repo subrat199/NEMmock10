@@ -4,7 +4,8 @@ const {userProfile}=require("../model/userProfile")
 const { userModel } = require('../model/userModel')
 userProfileRouter.get("/",async (req,res)=>{
     try {
-        const notes=await userModel.find()
+        const userid=req.body.userid
+        const notes=await userModel.find({_id:userid})
         console.log(notes)
         res.status(200).send(notes)
     } catch (error) {

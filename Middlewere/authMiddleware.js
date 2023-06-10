@@ -1,9 +1,12 @@
 const jwt = require("jsonwebtoken");
 const auth = (req,res,next)=>{
     const  token  = req.headers.authorization;
+   
     if(token){
         try {
             const decoded= jwt.verify(token.split(" ")[1], "masai"); 
+            const userid=decoded.userid
+            req.body.userid = userid
             if(decoded){
                 next();
             }else{
